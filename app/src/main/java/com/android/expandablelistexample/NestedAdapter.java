@@ -25,9 +25,7 @@ public class NestedAdapter extends RecyclerView.Adapter<NestedAdapter.NestedView
     private List<String> mList;
     Context context;
     Button save_buton;
-    ArrayList<String> array_0 = new ArrayList<>();
-    ArrayList<String> array_1 = new ArrayList<>();
-    List <String> arrayList = new ArrayList<>();
+
     Activity activity;
     DatabaseHelper myDB;
 
@@ -69,10 +67,13 @@ public class NestedAdapter extends RecyclerView.Adapter<NestedAdapter.NestedView
                 String edit = holder.text_desc.getText().toString();
 
                 if (holder.checkBox.isChecked()){
+                    holder.text_desc.setEnabled(false);
+                    holder.text_desc.setHint(R.string.hint_block);
+
 
                         myDB = new DatabaseHelper(save_buton.getContext());
                         myDB.addGoods(text, edit);
-                        System.out.println("Название " + text + " Дескриптион " + edit);
+
 
                     } else if (edit.isEmpty()) {
                     myDB = new DatabaseHelper(save_buton.getContext());
@@ -80,6 +81,9 @@ public class NestedAdapter extends RecyclerView.Adapter<NestedAdapter.NestedView
                 }
 
                 if (!holder.checkBox.isChecked()) {
+                    holder.text_desc.setEnabled(true);
+                    holder.text_desc.setHint(R.string.hint_add);
+
                     String text1 = holder.mTv.getText().toString();
                     String untext = holder.mTv.getText().toString();
                     myDB = new DatabaseHelper(save_buton.getContext());

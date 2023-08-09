@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ExpandableListExample</string>
+    <string name="hint_add"><i>Добавьте примечание</i></string>
+    <string name="hint_block"><i>Снимите галочку, что бы добавить примечание</i></string>
 </resources>

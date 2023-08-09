@@ -9,6 +9,7 @@
     app:cardElevation="1dp"
     android:layout_margin="8dp">
 
+
     <TextView
         android:id="@+id/groop_index"
         android:layout_width="wrap_content"
@@ -28,23 +29,26 @@
         android:paddingStart="15dp"
         android:layout_gravity="top|start"
         android:textStyle="bold"/>
+
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/text_desc"
-       android:hint="@string/app_name"
-        android:textColor="#8c8c8c"
-        android:textSize="13sp"
+        android:hint="@string/hint_add"
+        android:textColorHint="#6C6A6A"
+
+        android:textColor="#070505"
+        android:textSize="10sp"
         android:paddingStart="15dp"
         android:layout_gravity="center|start|bottom"
         android:textStyle="bold"/>
-
 
     <CheckBox
         android:id="@+id/checkbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center|end"/>
+
 
 
 

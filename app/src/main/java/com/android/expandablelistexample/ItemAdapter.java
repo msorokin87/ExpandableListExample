@@ -73,12 +73,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
 
             }
         });
-        save_buton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(context, "Buton", Toast.LENGTH_SHORT).show();
-            }
-        });
+
     }
 
 

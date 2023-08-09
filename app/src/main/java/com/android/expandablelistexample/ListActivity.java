@@ -48,9 +48,9 @@ public class ListActivity extends AppCompatActivity {
 
         myDB = new DatabaseHelper(this);
 
-        goods_id = new ArrayList<>();
+       // goods_id = new ArrayList<>();
         goods_title = new ArrayList<>();
-        goods_desc = new ArrayList<>();
+       // goods_desc = new ArrayList<>();
 
         addItem();
         storeDataInArray();
@@ -66,16 +66,16 @@ public class ListActivity extends AppCompatActivity {
             no_data.setVisibility(View.VISIBLE);
         }
         else while (cursor.moveToNext()){
-            goods_id.add(cursor.getString(0));
+            //goods_id.add(cursor.getString(0));
             goods_title.add(cursor.getString(1));
-            goods_desc.add(cursor.getString(2));
+          //  goods_desc.add(cursor.getString(2));
 
         }
         empty_imageview.setVisibility(View.GONE);
         no_data.setVisibility(View.GONE);
     }
     void startAdapter(){
-        customAdapter = new CustomAdapter(ListActivity.this, this, goods_id, goods_title, goods_desc);
+        customAdapter = new CustomAdapter(ListActivity.this, this,  goods_title);
         recyclerView.setAdapter(customAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(ListActivity.this));
 
