@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,17 +17,25 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private List<DataModel> mList;
     private ItemAdapter adapter;
+    ;
     Button save_button;
+    EditText edit_name_list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         recyclerView = findViewById(R.id.main_recyclervie);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         save_button = findViewById(R.id.save_button);
+        edit_name_list = findViewById(R.id.edit_name_list);
+        String transfer = "doob";
+
+
+
 
         mList = new ArrayList<>();
 
@@ -110,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
         mList.add(new DataModel(nestedList6,"Baby Care"));
         mList.add(new DataModel(nestedList7 ,"Personal Care"));
 
-        adapter = new ItemAdapter(mList, this, save_button);
+        adapter = new ItemAdapter(mList, this, save_button, transfer);
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 

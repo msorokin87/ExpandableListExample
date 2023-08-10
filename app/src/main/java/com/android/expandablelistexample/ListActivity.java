@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ListActivity extends AppCompatActivity {
 
@@ -27,6 +28,8 @@ public class ListActivity extends AppCompatActivity {
     TextView no_data;
     DatabaseHelper myDB;
     ArrayList<String> goods_id, goods_title, goods_desc;
+    List<String> data;
+    private List<DataModel> mList;
     CustomAdapter customAdapter;
 
     @Override
@@ -47,10 +50,13 @@ public class ListActivity extends AppCompatActivity {
         delete_button = findViewById(R.id.delete_button);
 
         myDB = new DatabaseHelper(this);
+        mList = new ArrayList<>();
 
-       // goods_id = new ArrayList<>();
+        data = new ArrayList<>();
+        goods_id = new ArrayList<>();
         goods_title = new ArrayList<>();
-       // goods_desc = new ArrayList<>();
+        goods_desc = new ArrayList<>();
+
 
         addItem();
         storeDataInArray();
@@ -60,21 +66,31 @@ public class ListActivity extends AppCompatActivity {
     }
 
     void storeDataInArray(){
-        Cursor cursor = myDB.readAllData();
+        Cursor cursor = myDB.readByGroop("groop");
         if (cursor.getCount()==0){
             empty_imageview.setVisibility(View.VISIBLE);
             no_data.setVisibility(View.VISIBLE);
         }
         else while (cursor.moveToNext()){
-            //goods_id.add(cursor.getString(0));
+            goods_id.add(cursor.getString(0));
             goods_title.add(cursor.getString(1));
-          //  goods_desc.add(cursor.getString(2));
+           goods_desc.add(cursor.getString(2));
+           for (int i = 0; i< goods_title.size(); i++) {
+               data.add(goods_title.get(i));
+               System.out.println("Data " + data);
+           }
+            mList.add(new DataModel(data , "Мой лист"));
+
 
         }
         empty_imageview.setVisibility(View.GONE);
         no_data.setVisibility(View.GONE);
     }
+
+
+
     void startAdapter(){
+
         customAdapter = new CustomAdapter(ListActivity.this, this,  goods_title);
         recyclerView.setAdapter(customAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(ListActivity.this));

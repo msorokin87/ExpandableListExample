@@ -28,15 +28,20 @@ public class NestedAdapter extends RecyclerView.Adapter<NestedAdapter.NestedView
 
     Activity activity;
     DatabaseHelper myDB;
+    EditText edit_name_list;
+    String transfer;
+
 
 
     SharedPreferences.Editor sharedPreferences;
     SharedPreferences preferences;
 
-    public NestedAdapter(List<String> mList, Context context, Button save_buton){
+    public NestedAdapter(List<String> mList, Context context, Button save_buton, String transfer){
         this.mList = mList;
         this.context = context;
         this.save_buton = save_buton;
+        this.transfer = transfer;
+
 
 
     }
@@ -69,11 +74,9 @@ public class NestedAdapter extends RecyclerView.Adapter<NestedAdapter.NestedView
                 if (holder.checkBox.isChecked()){
                     holder.text_desc.setEnabled(false);
                     holder.text_desc.setHint(R.string.hint_block);
-
-
-                        myDB = new DatabaseHelper(save_buton.getContext());
-                        myDB.addGoods(text, edit);
-
+                    myDB = new DatabaseHelper(save_buton.getContext());
+                    myDB.addGoods(text, edit);
+                       // myDB.updateGroopName(text,text);
 
                     } else if (edit.isEmpty()) {
                     myDB = new DatabaseHelper(save_buton.getContext());
@@ -94,12 +97,29 @@ public class NestedAdapter extends RecyclerView.Adapter<NestedAdapter.NestedView
             }
         });
 
+        holder.checkBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                myDB.updateGroopName(holder.mTv.getText().toString(), transfer);
+            }
+        });
+
 
 
 
         save_buton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (edit_name_list == null) {
+                    Toast.makeText(context, "Введите название", Toast.LENGTH_SHORT).show();
+
+                } else  {
+
+                    myDB = new DatabaseHelper(save_buton.getContext());
+
+                    //myDB.updateGroopName(ed1);
+
+                }
 
                 preferences = context.getSharedPreferences("Button", Context.MODE_PRIVATE);
                 preferences.edit().clear().commit();
@@ -145,6 +165,8 @@ public class NestedAdapter extends RecyclerView.Adapter<NestedAdapter.NestedView
             save_button = itemView.findViewById(R.id.save_button);
             text_desc = itemView.findViewById(R.id.text_desc);
             groop_index = itemView.findViewById(R.id.groop_index);
+            edit_name_list = itemView.findViewById(R.id.edit_name_list);
+
 
 
         }

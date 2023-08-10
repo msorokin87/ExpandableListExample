@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -25,11 +26,16 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
     private List<String> list = new ArrayList<>();
     Context context;
     Button save_buton;
+    EditText edit_name_list;
+    String transfer;
 
-    public ItemAdapter(List<DataModel> mList, Context context, Button save_buton){
+
+    public ItemAdapter(List<DataModel> mList, Context context, Button save_buton, String transfer){
         this.mList  = mList;
         this.context = context;
         this.save_buton = save_buton;
+        this.transfer = transfer;
+
     }
     @NonNull
     @Override
@@ -55,7 +61,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
             holder.mArrowImage.setImageResource(R.drawable.arrow_down);
         }
 
-        NestedAdapter adapter = new NestedAdapter(list, context, save_buton);
+        NestedAdapter adapter = new NestedAdapter(list, context, save_buton, transfer);
         holder.nestedRecyclerView.setLayoutManager(new LinearLayoutManager(holder.itemView.getContext()));
         holder.nestedRecyclerView.setHasFixedSize(true);
         holder.nestedRecyclerView.setAdapter(adapter);
@@ -99,6 +105,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
             mArrowImage = itemView.findViewById(R.id.arro_imageview);
             nestedRecyclerView = itemView.findViewById(R.id.child_rv);
             groop_index = itemView.findViewById(R.id.groop_index);
+            edit_name_list = itemView.findViewById(R.id.edit_name_list);
 
 
 

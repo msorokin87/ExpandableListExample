@@ -19,6 +19,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COLUMN_ID = "_id";
     public static final String COLUMN_TITLE = "goods_title";
     public static final String COLUMN_DESC = "goods_desc";
+    public static final String COLUMN_GROOP = "groop";
+
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -30,6 +32,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String query = "CREATE TABLE " + TABLE_NAME +
                 " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 COLUMN_TITLE + " TEXT, " +
+                COLUMN_GROOP + " TEXT, " +
                 COLUMN_DESC + " TEXT);";
         db.execSQL(query);
 
@@ -65,6 +68,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         } return cursor;
     }
 
+    Cursor readByGroop (String groop) {
+
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + COLUMN_GROOP + " LIKE " + groop;
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = null;
+        if (db != null) {
+            cursor = db.rawQuery(query, null);
+        } return cursor;
+    }
+
     void updateData (String row_id, String title, String desc) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
@@ -76,6 +90,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             Toast.makeText(context, "Не получилось обновить", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(context, "Изменения сохранены", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    void updateGroopName (String row_id, String groop){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(COLUMN_GROOP, groop);
+        long result = db.update(TABLE_NAME, cv, "goods_title=?", new String[]{row_id});
+
+        if (result==-1) {
+            Toast.makeText(context, "NotUpdated", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(context, "Updated", Toast.LENGTH_SHORT).show();
         }
 
     }
