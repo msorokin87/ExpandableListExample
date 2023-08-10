@@ -16,6 +16,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final int DATABASE_VERSION = 1;
 
     public static final String TABLE_NAME = "my_lists";
+
+    public static final String TABLE_NAME_SORT = "my_sort";
+    public static final String COLUMN_ID_SORT = "_id";
+    public static final String COLUMN_NAME_SORT = "name";
+    public static final String COLUMN_ONE = "one";
+    public static final String COLUMN_TWO = "two";
+    public static final String COLUMN_THREE = "three";
+    public static final String COLUMN_FOUR = "four";
+    public static final String COLUMN_FIFE = "fife";
+    public static final String COLUMN_SIX = "six";
+    public static final String COLUMN_SEVEN = "seven";
+    public static final String COLUMN_EITH = "eith";
+    public static final String COLUMN_NINE = "nine";
+    public static final String COLUMN_THENE = "thene";
+    public static final String COLUMN_ELEVEN = "eleven";
+    public static final String COLUMN_TWELVE = "twelve";
     public static final String COLUMN_ID = "_id";
     public static final String COLUMN_TITLE = "goods_title";
     public static final String COLUMN_DESC = "goods_desc";
@@ -34,14 +50,60 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 COLUMN_TITLE + " TEXT, " +
                 COLUMN_GROOP + " TEXT, " +
                 COLUMN_DESC + " TEXT);";
+
+        String query2 = "CREATE TABLE " + TABLE_NAME_SORT +
+                " (" + COLUMN_ID_SORT + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COLUMN_NAME_SORT + " TEXT, " +
+                COLUMN_ONE + " TEXT, " +
+                COLUMN_TWO + " TEXT, " +
+                COLUMN_THREE + " TEXT, " +
+                COLUMN_FOUR + " TEXT, " +
+                COLUMN_FIFE + " TEXT, " +
+                COLUMN_SIX + " TEXT, " +
+                COLUMN_SEVEN + " TEXT, " +
+                COLUMN_EITH+ " TEXT, " +
+                COLUMN_NINE + " TEXT, " +
+                COLUMN_THENE + " TEXT, " +
+                COLUMN_ELEVEN + " TEXT, " +
+                COLUMN_TWELVE + " TEXT);";
+
+
         db.execSQL(query);
+        db.execSQL(query2);
 
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_SORT);
         onCreate(db);
+    }
+
+    void addAllinSort(String one,String two,String three,String four,String fife,
+                      String six,String seven,String eith,String nine,String thene,
+                      String eleven,String tvelve) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(COLUMN_ONE, one);
+        cv.put(COLUMN_TWO, two);
+        cv.put(COLUMN_THREE, three);
+        cv.put(COLUMN_FOUR, four);
+        cv.put(COLUMN_FIFE, fife);
+        cv.put(COLUMN_SIX, six);
+        cv.put(COLUMN_SEVEN, seven);
+        cv.put(COLUMN_EITH, eith);
+        cv.put(COLUMN_NINE, nine);
+        cv.put(COLUMN_THENE, thene);
+        cv.put(COLUMN_ELEVEN, eleven);
+        cv.put(COLUMN_TWELVE, tvelve);
+
+        long result = db.insert(TABLE_NAME_SORT, null, cv);
+        if (result ==-1) {
+            Toast.makeText(context, "Не вышло в Сорт", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(context, "В Сорт", Toast.LENGTH_SHORT).show();
+        }
     }
 
     void addGoods(String title, String desc) {
@@ -60,6 +122,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
     Cursor readAllData() {
         String query = "SELECT * FROM " + TABLE_NAME;
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = null;
+        if (db != null) {
+            cursor = db.rawQuery(query, null);
+        } return cursor;
+    }
+
+    Cursor readAllSort() {
+        String query = "SELECT * FROM " + TABLE_NAME_SORT;
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = null;
