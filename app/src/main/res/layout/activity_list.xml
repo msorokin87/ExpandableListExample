@@ -55,6 +55,8 @@
         app:layout_constraintBottom_toBottomOf="@+id/back_button"
         app:layout_constraintEnd_toStartOf="@+id/back_button"/>
 
+
+
     <ImageView
         android:id="@+id/empty_imageview"
         android:layout_width="wrap_content"

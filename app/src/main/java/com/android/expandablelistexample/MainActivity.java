@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -18,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
     private List<DataModel> mList;
     private ItemAdapter adapter;
     ;
-    Button save_button;
+    Button save_button, back_list;
     EditText edit_name_list;
 
     @Override
@@ -31,11 +32,18 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         save_button = findViewById(R.id.save_button);
+        back_list = findViewById(R.id.back_list);
         edit_name_list = findViewById(R.id.edit_name_list);
         String transfer = "doob";
 
 
-
+        back_list.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ListActivity.class);
+                startActivity(intent);
+            }
+        });
 
         mList = new ArrayList<>();
 

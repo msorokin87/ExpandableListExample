@@ -125,6 +125,8 @@ public class NestedAdapter extends RecyclerView.Adapter<NestedAdapter.NestedView
                 preferences.edit().clear().commit();
                 Intent intent = new Intent(v.getContext(), ListActivity.class);
                 context.startActivity(intent);
+
+
                 
 
             }
@@ -172,6 +174,7 @@ public class NestedAdapter extends RecyclerView.Adapter<NestedAdapter.NestedView
         }
 
     }
+
 
 }
 
