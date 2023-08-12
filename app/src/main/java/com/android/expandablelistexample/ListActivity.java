@@ -29,22 +29,21 @@ public class ListActivity extends AppCompatActivity {
     ImageView empty_imageview;
     TextView no_data;
     ArrayList<ModelNewList> modelArray, modelGoodsArray;
-    String[] oneGods;
-    String one = "";
-    String two = "";
-    String three = "";
-    String four = "";
-    String fife = "";
-    String six = "";
-    String seven = "";
-    String eith = "";
-    String nine = "";
-    String thene = "";
-    String eleven = "";
-    String tvele = "";
+    /*String one;
+    String two;
+    String three;
+    String four;
+    String fife;
+    String six;
+    String seven;
+    String eith;
+    String nine;
+    String thene;
+    String eleven;
+    String tvele;*/
 
     DatabaseHelper myDB;
-    ArrayList<String> newArraytoAdapter, goods_title, arrayListtoAdapter;
+    ArrayList<String> newArraytoAdapter, id_row, one, two, three, four, fife, six, seven, eith, nine, thene, eleven, tvele;
     CustomAdapter customAdapter;
 
     @Override
@@ -63,11 +62,25 @@ public class ListActivity extends AppCompatActivity {
 
         modelArray = new ArrayList<>();
 
+        id_row = new ArrayList<>();
+        one = new ArrayList<>();
+        two = new ArrayList<>();
+        three = new ArrayList<>();
+        four = new ArrayList<>();
+        fife = new ArrayList<>();
+        six = new ArrayList<>();
+        seven = new ArrayList<>();
+        eith = new ArrayList<>();
+        nine = new ArrayList<>();
+        thene = new ArrayList<>();
+        eleven = new ArrayList<>();
+        tvele = new ArrayList<>();
 
-        goods_title = new ArrayList<>();
-        newArraytoAdapter = new ArrayList<>();
 
-        //storeDataInArray();
+
+        //newArraytoAdapter = new ArrayList<>();
+
+        storeDataInArray();
 
         //sortetoNewTable();
 
@@ -88,9 +101,9 @@ public class ListActivity extends AppCompatActivity {
 
            /* modelArray.add(new ModelNewList(newArraytoAdapter.toString()));*/
 
-        /*customAdapter = new CustomAdapter(ListActivity.this, this, modelArray, one);
+        customAdapter = new CustomAdapter(ListActivity.this, this, id_row, one, two, three, four, fife, six, seven, eith, nine, thene, eleven, tvele);
         recyclerView.setAdapter(customAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(ListActivity.this));*/
+        recyclerView.setLayoutManager(new LinearLayoutManager(ListActivity.this));
 
 
         backButon();
@@ -98,21 +111,33 @@ public class ListActivity extends AppCompatActivity {
         addItem();
 
     }
-    /*void storeDataInArray(){
+    void storeDataInArray(){
 
-        Cursor cursor = myDB.readAllData();
+        Cursor cursor = myDB.readAllSort();
         if (cursor.getCount()==0){
             empty_imageview.setVisibility(View.VISIBLE);
             no_data.setVisibility(View.VISIBLE);
         }
         else while (cursor.moveToNext()){
-            goods_title.add(cursor.getString(1));
+            id_row.add(cursor.getString(0));
+            one.add(cursor.getString(2));
+            two.add(cursor.getString(3));
+            three.add(cursor.getString(4));
+            four.add(cursor.getString(5));
+            fife.add(cursor.getString(6));
+            six.add(cursor.getString(7));
+            seven.add(cursor.getString(8));
+            eith.add(cursor.getString(9));
+            nine.add(cursor.getString(10));
+            thene.add(cursor.getString(11));
+            eleven.add(cursor.getString(12));
+            tvele.add(cursor.getString(13));
 
         }
         empty_imageview.setVisibility(View.GONE);
         no_data.setVisibility(View.GONE);
 
-    }*/
+    }
 
    /* void sortetoNewTable(){
         size = goods_title.size();
@@ -198,7 +223,7 @@ public class ListActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 myDB = new DatabaseHelper(ListActivity.this);
-                myDB.deleteAllData();
+                myDB.deleteAllDataSort();
 
 
                 Intent intent = new Intent(ListActivity.this, ListActivity.class);
