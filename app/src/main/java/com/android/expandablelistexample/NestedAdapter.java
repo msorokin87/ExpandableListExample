@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +28,9 @@ public class NestedAdapter extends RecyclerView.Adapter<NestedAdapter.NestedView
     Button save_buton;
 
     Activity activity;
+    ArrayList<String> pre_goods = new ArrayList<>();
+    String one, two, three, four, fife, six, seven, eith, nine, thene, eleven, tvele;
+    int size;
     DatabaseHelper myDB;
     EditText edit_name_list;
     String transfer;
@@ -72,8 +76,10 @@ public class NestedAdapter extends RecyclerView.Adapter<NestedAdapter.NestedView
                 String edit = holder.text_desc.getText().toString();
 
                 if (holder.checkBox.isChecked()){
+
                     holder.text_desc.setEnabled(false);
                     holder.text_desc.setHint(R.string.hint_block);
+
                     myDB = new DatabaseHelper(save_buton.getContext());
                     myDB.addGoods(text, edit);
                        // myDB.updateGroopName(text,text);
@@ -103,23 +109,65 @@ public class NestedAdapter extends RecyclerView.Adapter<NestedAdapter.NestedView
                 myDB.updateGroopName(holder.mTv.getText().toString(), transfer);
             }
         });
-
-
-
-
         save_buton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (edit_name_list == null) {
-                    Toast.makeText(context, "Введите название", Toast.LENGTH_SHORT).show();
+                Cursor cursor = myDB.readAllData();
+                if (cursor.getCount()==0){
+                    Toast.makeText(context, "Ничего не выбрано", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(v.getContext(), ListActivity.class);
+                    context.startActivity(intent);
+                }
+                else while (cursor.moveToNext()){
+                    pre_goods.add(cursor.getString(1));
+                }
+                size = pre_goods.size();
+                System.out.println(size);
 
-                } else  {
-
-                    myDB = new DatabaseHelper(save_buton.getContext());
-
-                    //myDB.updateGroopName(ed1);
+                for (int i = 0 ; i<size; i++){
+                    if (i == 0) {
+                        one = pre_goods.get(0);
+                    }
+                    if (i == 1) {
+                        two = pre_goods.get(1);
+                    }
+                    if (i == 2) {
+                        three = pre_goods.get(2);
+                    }
+                    if (i == 3) {
+                        four = pre_goods.get(3);
+                    }
+                    if (i == 4) {
+                        fife = pre_goods.get(4);
+                    }
+                    if (i == 5) {
+                        six = pre_goods.get(5);
+                    }
+                    if (i == 6) {
+                        seven = pre_goods.get(6);
+                    }
+                    if (i == 7) {
+                        eith = pre_goods.get(7);
+                    }
+                    if (i == 8) {
+                        nine = pre_goods.get(8);
+                    }
+                    if (i == 9) {
+                        thene = pre_goods.get(9);
+                    }
+                    if (i == 10) {
+                        eleven = pre_goods.get(10);
+                    }
+                    if (i == 11) {
+                        tvele = pre_goods.get(11);
+                    }
 
                 }
+                myDB = new DatabaseHelper(save_buton.getContext());
+                myDB.addAllinSort(one, two, three, four, fife, six, seven, eith, nine, thene, eleven, tvele);
+                myDB.deleteAllData();
+
+
 
                 preferences = context.getSharedPreferences("Button", Context.MODE_PRIVATE);
                 preferences.edit().clear().commit();

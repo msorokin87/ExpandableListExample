@@ -80,6 +80,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+
+
+
     void addAllinSort(String one,String two,String three,String four,String fife,
                       String six,String seven,String eith,String nine,String thene,
                       String eleven,String tvelve) {
@@ -119,6 +122,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         } else {
             Toast.makeText(context, "Сохранено", Toast.LENGTH_SHORT).show();
         }
+        db.close();
     }
     Cursor readAllData() {
         String query = "SELECT * FROM " + TABLE_NAME;
@@ -127,7 +131,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor cursor = null;
         if (db != null) {
             cursor = db.rawQuery(query, null);
-        } return cursor;
+
+        }
+
+        return cursor;
+
     }
 
     Cursor readAllSort() {
@@ -163,6 +171,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         } else {
             Toast.makeText(context, "Изменения сохранены", Toast.LENGTH_SHORT).show();
         }
+        db.close();
 
     }
 
@@ -177,6 +186,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         } else {
             Toast.makeText(context, "Updated", Toast.LENGTH_SHORT).show();
         }
+        db.close();
 
     }
     void updateOnePosition(String edit) {
@@ -205,5 +215,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     void deleteAllData() {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DELETE FROM " + TABLE_NAME);
+    }
+
+    void deleteAllDataSort() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DELETE FROM " + TABLE_NAME_SORT);
     }
 }
