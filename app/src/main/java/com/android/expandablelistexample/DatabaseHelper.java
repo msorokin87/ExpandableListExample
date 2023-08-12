@@ -148,15 +148,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         } return cursor;
     }
 
-    Cursor readByGroop (String groop) {
-
-        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + COLUMN_GROOP + " LIKE " + groop;
+    Cursor readAllByID (String id) {
         SQLiteDatabase db = this.getReadableDatabase();
+        String[] column = new String[]{COLUMN_ID_SORT};
+        String selection ="_id";
+        String[] selectionArgs = new String[]{id};
 
-        Cursor cursor = null;
-        if (db != null) {
-            cursor = db.rawQuery(query, null);
-        } return cursor;
+        Cursor cursor =  db.query(TABLE_NAME_SORT, new String[]{COLUMN_ID_SORT}, "_id" + "=?", selectionArgs, null, null, null,
+                null);
+
+        return cursor;
+
     }
 
     void updateData (String row_id, String title, String desc) {
