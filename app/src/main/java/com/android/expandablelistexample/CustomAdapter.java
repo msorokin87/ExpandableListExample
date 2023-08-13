@@ -81,22 +81,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter
                 myDb.addGoods(String.valueOf(eleven.get(position)), String.valueOf(id_row.get(position)));
                 myDb.addGoods(String.valueOf(tvele.get(position)), String.valueOf(id_row.get(position)));
 
-
-                intent.putExtra("id", String.valueOf(id_row.get(position)));
-                intent.putExtra("one", String.valueOf(one.get(position)));
-                intent.putExtra("two", String.valueOf(two.get(position)));
-                intent.putExtra("three", String.valueOf(three.get(position)));
-                intent.putExtra("for", String.valueOf(four.get(position)));
-                intent.putExtra("fife", String.valueOf(fife.get(position)));
-                intent.putExtra("six", String.valueOf(six.get(position)));
-                intent.putExtra("seven", String.valueOf(seven.get(position)));
-                intent.putExtra("eith", String.valueOf(eith.get(position)));
-                intent.putExtra("nine", String.valueOf(nine.get(position)));
-                intent.putExtra("thene", String.valueOf(thene.get(position)));
-                intent.putExtra("eleven", String.valueOf(eleven.get(position)));
-                intent.putExtra("tvelve", String.valueOf(tvele.get(position)));
-
-
                 activity.startActivityForResult(intent, 1);
 
             }

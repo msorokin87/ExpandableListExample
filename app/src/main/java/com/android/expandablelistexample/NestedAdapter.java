@@ -82,7 +82,7 @@ public class NestedAdapter extends RecyclerView.Adapter<NestedAdapter.NestedView
 
                     myDB = new DatabaseHelper(save_buton.getContext());
                     myDB.addGoods(text, edit);
-                       // myDB.updateGroopName(text,text);
+                    // myDB.updateGroopName(text,text);
 
                     } else if (edit.isEmpty()) {
                     myDB = new DatabaseHelper(save_buton.getContext());

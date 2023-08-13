@@ -28,7 +28,6 @@ public class ShowActivity extends AppCompatActivity {
         String id="";
         TextView text_data;
         DatabaseHelper myDB;
-        int id_new;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +39,8 @@ public class ShowActivity extends AppCompatActivity {
 
         one = new ArrayList<>();
         two1 = new ArrayList<>();
-        //getAndSetIntent();
-        if (getIntent().hasExtra("id")){
+
+                if (getIntent().hasExtra("id")){
             id = getIntent().getStringExtra("id");
         }
         text_data.setText(id);
@@ -57,13 +56,11 @@ public class ShowActivity extends AppCompatActivity {
         for (String lis : list){
             if (!lis.equals("null")){
                 two1.add(lis);
-                //System.out.println("Twoq после перебора " + two1);
+
             }
         }
 
         System.out.println("Выход из цикла " + two1);
-
-
 
 
         adapterShow = new CustomAdapterShow(ShowActivity.this, this, two1);
@@ -80,11 +77,6 @@ public class ShowActivity extends AppCompatActivity {
 
     }
 
-    void getAndSetIntent(){
-
-
-
-        }
 
     @Override
     protected void onStop() {
