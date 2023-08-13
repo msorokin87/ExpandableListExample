@@ -68,18 +68,18 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter
             public void onClick(View v) {
                 myDb = new DatabaseHelper(holder.layout_raw.getContext());
                 Intent intent = new Intent(context, ShowActivity.class);
-                myDb.addGoods(String.valueOf(one.get(position)), String.valueOf(id_row.get(position)));
-                myDb.addGoods(String.valueOf(two.get(position)), String.valueOf(id_row.get(position)));
-                myDb.addGoods(String.valueOf(three.get(position)), String.valueOf(id_row.get(position)));
-                myDb.addGoods(String.valueOf(four.get(position)), String.valueOf(id_row.get(position)));
-                myDb.addGoods(String.valueOf(fife.get(position)), String.valueOf(id_row.get(position)));
-                myDb.addGoods(String.valueOf(six.get(position)), String.valueOf(id_row.get(position)));
-                myDb.addGoods(String.valueOf(seven.get(position)), String.valueOf(id_row.get(position)));
-                myDb.addGoods(String.valueOf(eith.get(position)), String.valueOf(id_row.get(position)));
-                myDb.addGoods(String.valueOf(nine.get(position)), String.valueOf(id_row.get(position)));
-                myDb.addGoods(String.valueOf(thene.get(position)), String.valueOf(id_row.get(position)));
-                myDb.addGoods(String.valueOf(eleven.get(position)), String.valueOf(id_row.get(position)));
-                myDb.addGoods(String.valueOf(tvele.get(position)), String.valueOf(id_row.get(position)));
+                myDb.addGoods(String.valueOf(one.get(position)));
+                myDb.addGoods(String.valueOf(two.get(position)));
+                myDb.addGoods(String.valueOf(three.get(position)));
+                myDb.addGoods(String.valueOf(four.get(position)));
+                myDb.addGoods(String.valueOf(fife.get(position)));
+                myDb.addGoods(String.valueOf(six.get(position)));
+                myDb.addGoods(String.valueOf(seven.get(position)));
+                myDb.addGoods(String.valueOf(eith.get(position)));
+                myDb.addGoods(String.valueOf(nine.get(position)));
+                myDb.addGoods(String.valueOf(thene.get(position)));
+                myDb.addGoods(String.valueOf(eleven.get(position)));
+                myDb.addGoods(String.valueOf(tvele.get(position)));
 
                 activity.startActivityForResult(intent, 1);
 

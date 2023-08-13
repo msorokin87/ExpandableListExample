@@ -29,8 +29,10 @@ public class NestedAdapter extends RecyclerView.Adapter<NestedAdapter.NestedView
 
     Activity activity;
     ArrayList<String> pre_goods = new ArrayList<>();
+    ArrayList<String> pre_desc = new ArrayList<>();
     String one, two, three, four, fife, six, seven, eith, nine, thene, eleven, tvele;
-    int size;
+    String one_d, two_d, three_d, four_d, fife_d, six_d, seven_d, eith_d, nine_d, thene_d, eleven_d, tvele_d;
+    int size, size_desc;
     DatabaseHelper myDB;
     EditText edit_name_list;
     String transfer;
@@ -81,22 +83,22 @@ public class NestedAdapter extends RecyclerView.Adapter<NestedAdapter.NestedView
                     holder.text_desc.setHint(R.string.hint_block);
 
                     myDB = new DatabaseHelper(save_buton.getContext());
-                    myDB.addGoods(text, edit);
-                    // myDB.updateGroopName(text,text);
+                    myDB.addGoods(text);
+                    myDB.addDesc(edit);
+
 
                     } else if (edit.isEmpty()) {
-                    myDB = new DatabaseHelper(save_buton.getContext());
-                    myDB.addGoods(text, "emty");
+                    //myDB = new DatabaseHelper(save_buton.getContext());
+
                 }
 
                 if (!holder.checkBox.isChecked()) {
                     holder.text_desc.setEnabled(true);
                     holder.text_desc.setHint(R.string.hint_add);
 
-                    String text1 = holder.mTv.getText().toString();
                     String untext = holder.mTv.getText().toString();
                     myDB = new DatabaseHelper(save_buton.getContext());
-                    System.out.println("Снято " + text1);
+                    System.out.println("Снято " + untext);
                     myDB.deleteOneRaw(untext);
                 }
 
@@ -106,13 +108,14 @@ public class NestedAdapter extends RecyclerView.Adapter<NestedAdapter.NestedView
         holder.checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myDB.updateGroopName(holder.mTv.getText().toString(), transfer);
+                //myDB.updateGroopName(holder.mTv.getText().toString(), transfer);
             }
         });
         save_buton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Cursor cursor = myDB.readAllData();
+
                 if (cursor.getCount()==0){
                     Toast.makeText(context, "Ничего не выбрано", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(v.getContext(), ListActivity.class);
@@ -121,8 +124,55 @@ public class NestedAdapter extends RecyclerView.Adapter<NestedAdapter.NestedView
                 else while (cursor.moveToNext()){
                     pre_goods.add(cursor.getString(1));
                 }
+                Cursor curesor_desc = myDB.readAllDesc();
+                if (curesor_desc.getCount() ==0){
+
+                }
+                else while (curesor_desc.moveToNext()){
+                    pre_desc.add(curesor_desc.getString(1));
+                }
                 size = pre_goods.size();
+                size_desc = pre_desc.size();
                 System.out.println(size);
+
+                for (int i = 0; i<size_desc; i++){
+                    if (i == 0) {
+                        one_d = pre_desc.get(0);
+                    }
+                    if (i == 1) {
+                        two_d = pre_desc.get(1);
+                    }
+                    if (i == 2) {
+                        three_d = pre_desc.get(2);
+                    }
+                    if (i == 3) {
+                        four_d = pre_desc.get(3);
+                    }
+                    if (i == 4) {
+                        fife_d = pre_desc.get(4);
+                    }
+                    if (i == 5) {
+                        six_d = pre_desc.get(5);
+                    }
+                    if (i == 6) {
+                        seven_d = pre_desc.get(6);
+                    }
+                    if (i == 7) {
+                        eith_d = pre_desc.get(7);
+                    }
+                    if (i == 8) {
+                        nine_d = pre_desc.get(8);
+                    }
+                    if (i == 9) {
+                        thene_d = pre_desc.get(9);
+                    }
+                    if (i == 10) {
+                        eleven_d = pre_desc.get(10);
+                    }
+                    if (i == 11) {
+                        tvele_d = pre_desc.get(11);
+                    }
+                }
 
                 for (int i = 0 ; i<size; i++){
                     if (i == 0) {
@@ -165,7 +215,9 @@ public class NestedAdapter extends RecyclerView.Adapter<NestedAdapter.NestedView
                 }
                 myDB = new DatabaseHelper(save_buton.getContext());
                 myDB.addAllinSort(one, two, three, four, fife, six, seven, eith, nine, thene, eleven, tvele);
+                myDB.addAllinDesc(one_d, two_d, three_d, four_d, fife_d, six_d, seven_d, eith_d, nine_d, thene_d, eleven_d, tvele_d);
                 myDB.deleteAllData();
+                myDB.deleteAllDataDesc();
 
 
 

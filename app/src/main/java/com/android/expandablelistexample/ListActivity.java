@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
@@ -130,6 +132,9 @@ public class ListActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ListActivity.this, MainActivity.class );
+                SharedPreferences preferences = getSharedPreferences("Button", Context.MODE_PRIVATE);
+                preferences.edit().clear().commit();
+
                 startActivity(intent);
                 overridePendingTransition(0,0);
             }
@@ -151,6 +156,7 @@ public class ListActivity extends AppCompatActivity {
             public void onClick(View v) {
                 myDB = new DatabaseHelper(ListActivity.this);
                 myDB.deleteAllDataSort();
+                myDB.deleteAllDataDesc();
 
 
                 Intent intent = new Intent(ListActivity.this, ListActivity.class);

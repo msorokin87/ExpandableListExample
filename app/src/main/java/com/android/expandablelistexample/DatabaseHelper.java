@@ -16,10 +16,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final int DATABASE_VERSION = 1;
 
     public static final String TABLE_NAME = "my_lists";
+    public static final String COLUMN_ID = "_id";
+    public static final String TABLE_NAME_DESC = "my_desc";
+    public static final String COLUMN_ID_DESC = "_id";
+    public static final String TABLE_NAME_DESC_NEW = "my_desc_new";
+    public static final String COLUMN_ID_DESC_NEW = "_id";
 
     public static final String TABLE_NAME_SORT = "my_sort";
+
+
     public static final String COLUMN_ID_SORT = "_id";
+
+
     public static final String COLUMN_NAME_SORT = "name";
+    public static final String COLUMN_NAME_DESC_D = "name";
     public static final String COLUMN_ONE = "one";
     public static final String COLUMN_TWO = "two";
     public static final String COLUMN_THREE = "three";
@@ -32,9 +42,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COLUMN_THENE = "thene";
     public static final String COLUMN_ELEVEN = "eleven";
     public static final String COLUMN_TWELVE = "twelve";
-    public static final String COLUMN_ID = "_id";
+
+    public static final String COLUMN_ONE_D = "one";
+    public static final String COLUMN_TWO_D = "two";
+    public static final String COLUMN_THREE_D = "three";
+    public static final String COLUMN_FOUR_D = "four";
+    public static final String COLUMN_FIFE_D = "fife";
+    public static final String COLUMN_SIX_D = "six";
+    public static final String COLUMN_SEVEN_D = "seven";
+    public static final String COLUMN_EITH_D = "eith";
+    public static final String COLUMN_NINE_D = "nine";
+    public static final String COLUMN_THENE_D = "thene";
+    public static final String COLUMN_ELEVEN_D = "eleven";
+    public static final String COLUMN_TWELVE_D = "twelve";
+
     public static final String COLUMN_TITLE = "goods_title";
     public static final String COLUMN_DESC = "goods_desc";
+    public static final String COLUMN_DESC_ONE = "goods_desc_new";
     public static final String COLUMN_GROOP = "groop";
 
 
@@ -47,9 +71,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String query = "CREATE TABLE " + TABLE_NAME +
                 " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                COLUMN_TITLE + " TEXT, " +
-                COLUMN_GROOP + " TEXT, " +
-                COLUMN_DESC + " TEXT);";
+                COLUMN_TITLE + " TEXT);";
 
         String query2 = "CREATE TABLE " + TABLE_NAME_SORT +
                 " (" + COLUMN_ID_SORT + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -67,9 +89,31 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 COLUMN_ELEVEN + " TEXT, " +
                 COLUMN_TWELVE + " TEXT);";
 
+        String query3 = "CREATE TABLE " + TABLE_NAME_DESC +
+                " (" + COLUMN_ID_DESC + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COLUMN_DESC_ONE + " TEXT);";
+
+        String query4 = "CREATE TABLE " + TABLE_NAME_DESC_NEW +
+                " (" + COLUMN_ID_DESC_NEW + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COLUMN_NAME_DESC_D + " TEXT, " +
+                COLUMN_ONE_D + " TEXT, " +
+                COLUMN_TWO_D + " TEXT, " +
+                COLUMN_THREE_D + " TEXT, " +
+                COLUMN_FOUR_D + " TEXT, " +
+                COLUMN_FIFE_D + " TEXT, " +
+                COLUMN_SIX_D + " TEXT, " +
+                COLUMN_SEVEN_D + " TEXT, " +
+                COLUMN_EITH_D + " TEXT, " +
+                COLUMN_NINE_D + " TEXT, " +
+                COLUMN_THENE_D + " TEXT, " +
+                COLUMN_ELEVEN_D + " TEXT, " +
+                COLUMN_TWELVE_D + " TEXT);";
+
 
         db.execSQL(query);
         db.execSQL(query2);
+        db.execSQL(query3);
+        db.execSQL(query4);
 
     }
 
@@ -77,6 +121,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_SORT);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_DESC);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_DESC_NEW);
         onCreate(db);
     }
 
@@ -108,19 +154,58 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             Toast.makeText(context, "В Сорт", Toast.LENGTH_SHORT).show();
         }
     }
+    void addAllinDesc(String one_d,String two_d,String three_d,String four_d,String fife_d,
+                      String six_d,String seven_d,String eith_d,String nine_d,String thene_d,
+                      String eleven_d,String tvelve_d) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(COLUMN_ONE, one_d);
+        cv.put(COLUMN_TWO, two_d);
+        cv.put(COLUMN_THREE, three_d);
+        cv.put(COLUMN_FOUR, four_d);
+        cv.put(COLUMN_FIFE, fife_d);
+        cv.put(COLUMN_SIX, six_d);
+        cv.put(COLUMN_SEVEN, seven_d);
+        cv.put(COLUMN_EITH, eith_d);
+        cv.put(COLUMN_NINE, nine_d);
+        cv.put(COLUMN_THENE, thene_d);
+        cv.put(COLUMN_ELEVEN, eleven_d);
+        cv.put(COLUMN_TWELVE, tvelve_d);
 
-    void addGoods(String title, String desc) {
+        long result = db.insert(TABLE_NAME_DESC_NEW, null, cv);
+        if (result ==-1) {
+            Toast.makeText(context, "Не вышло в Сорт", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(context, "В Сорт", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    void addGoods(String title) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
         cv.put(COLUMN_TITLE, title);
-        cv.put(COLUMN_DESC, desc);
+
 
         long result = db.insert(TABLE_NAME, null, cv);
         if (result ==-1) {
             Toast.makeText(context, "Не получилось сохранить", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(context, "Сохранено", Toast.LENGTH_SHORT).show();
+        }
+        db.close();
+    }
+
+    void addDesc(String desc) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(COLUMN_DESC_ONE, desc);
+
+        long result = db.insert(TABLE_NAME_DESC, null, cv);
+        if (result ==-1) {
+            Toast.makeText(context, "Не добавилось в деск", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(context, "Добавилось в деск", Toast.LENGTH_SHORT).show();
         }
         db.close();
     }
@@ -131,15 +216,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor cursor = null;
         if (db != null) {
             cursor = db.rawQuery(query, null);
-
         }
-
         return cursor;
-
     }
 
     Cursor readAllSort() {
         String query = "SELECT * FROM " + TABLE_NAME_SORT;
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = null;
+        if (db != null) {
+            cursor = db.rawQuery(query, null);
+        } return cursor;
+    }
+    Cursor readAllDesc() {
+        String query = "SELECT * FROM " + TABLE_NAME_DESC_NEW;
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = null;
@@ -222,5 +313,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     void deleteAllDataSort() {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DELETE FROM " + TABLE_NAME_SORT);
+    }
+    void deleteAllDataDesc() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DELETE FROM " + TABLE_NAME_DESC);
     }
 }
