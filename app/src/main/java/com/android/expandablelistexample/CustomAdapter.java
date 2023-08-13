@@ -20,6 +20,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter
         .MyViewHolder> {
    private Context context;
    private Activity activity;
+   DatabaseHelper myDb;
    ArrayList<String> id_row, one, two, three, four, fife, six, seven, eith, nine, thene, eleven, tvele;
 
     public CustomAdapter(Context context, Activity activity, ArrayList<String> id_row, ArrayList<String> one,
@@ -65,7 +66,22 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter
         holder.layout_raw.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                myDb = new DatabaseHelper(holder.layout_raw.getContext());
                 Intent intent = new Intent(context, ShowActivity.class);
+                myDb.addGoods(String.valueOf(one.get(position)), String.valueOf(id_row.get(position)));
+                myDb.addGoods(String.valueOf(two.get(position)), String.valueOf(id_row.get(position)));
+                myDb.addGoods(String.valueOf(three.get(position)), String.valueOf(id_row.get(position)));
+                myDb.addGoods(String.valueOf(four.get(position)), String.valueOf(id_row.get(position)));
+                myDb.addGoods(String.valueOf(fife.get(position)), String.valueOf(id_row.get(position)));
+                myDb.addGoods(String.valueOf(six.get(position)), String.valueOf(id_row.get(position)));
+                myDb.addGoods(String.valueOf(seven.get(position)), String.valueOf(id_row.get(position)));
+                myDb.addGoods(String.valueOf(eith.get(position)), String.valueOf(id_row.get(position)));
+                myDb.addGoods(String.valueOf(nine.get(position)), String.valueOf(id_row.get(position)));
+                myDb.addGoods(String.valueOf(thene.get(position)), String.valueOf(id_row.get(position)));
+                myDb.addGoods(String.valueOf(eleven.get(position)), String.valueOf(id_row.get(position)));
+                myDb.addGoods(String.valueOf(tvele.get(position)), String.valueOf(id_row.get(position)));
+
+
                 intent.putExtra("id", String.valueOf(id_row.get(position)));
                 intent.putExtra("one", String.valueOf(one.get(position)));
                 intent.putExtra("two", String.valueOf(two.get(position)));
@@ -79,6 +95,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter
                 intent.putExtra("thene", String.valueOf(thene.get(position)));
                 intent.putExtra("eleven", String.valueOf(eleven.get(position)));
                 intent.putExtra("tvelve", String.valueOf(tvele.get(position)));
+
+
                 activity.startActivityForResult(intent, 1);
 
             }

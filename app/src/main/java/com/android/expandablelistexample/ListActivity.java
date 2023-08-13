@@ -77,29 +77,8 @@ public class ListActivity extends AppCompatActivity {
         tvele = new ArrayList<>();
 
 
-
-        //newArraytoAdapter = new ArrayList<>();
-
         storeDataInArray();
 
-        //sortetoNewTable();
-
-
-       /* for (int i = 0; i< goods_title.size(); i++){
-            newArraytoAdapter.add(goods_title.get(i));
-            //modelArray.add(new ModelNewList(goods_title.get(i)));
-        }*/
-
-
-       /* for (int k = 0 ; k < newArraytoAdapter.size(); k++) {   //выводит по одному в список
-           // modelArray.add(new ModelNewList(newArraytoAdapter.get(k)));
-
-            //если так то в одном item все скопом, но в ShowActivity все приходит правильно
-        }*/
-
-
-
-           /* modelArray.add(new ModelNewList(newArraytoAdapter.toString()));*/
 
         customAdapter = new CustomAdapter(ListActivity.this, this, id_row, one, two, three, four, fife, six, seven, eith, nine, thene, eleven, tvele);
         recyclerView.setAdapter(customAdapter);
@@ -138,58 +117,6 @@ public class ListActivity extends AppCompatActivity {
         no_data.setVisibility(View.GONE);
 
     }
-
-   /* void sortetoNewTable(){
-        size = goods_title.size();
-        System.out.println(size);
-
-        for (int i = 0 ; i<size; i++){
-            if (i == 0) {
-                one = goods_title.get(0);
-            }
-            if (i == 1) {
-                two = goods_title.get(1);
-            }
-            if (i == 2) {
-                three = goods_title.get(2);
-            }
-            if (i == 3) {
-                four = goods_title.get(3);
-            }
-            if (i == 4) {
-                fife = goods_title.get(4);
-            }
-            if (i == 5) {
-                six = goods_title.get(5);
-            }
-            if (i == 6) {
-                seven = goods_title.get(6);
-            }
-            if (i == 7) {
-                eith = goods_title.get(7);
-            }
-            if (i == 8) {
-                nine = goods_title.get(8);
-            }
-            if (i == 9) {
-                thene = goods_title.get(9);
-            }
-            if (i == 10) {
-                eleven = goods_title.get(10);
-            }
-            if (i == 11) {
-                tvele = goods_title.get(11);
-            }
-
-
-
-        }
-
-
-        myDB = new DatabaseHelper(ListActivity.this);
-        myDB.addAllinSort(one, two, three, four, fife, six, seven, eith, nine, thene, eleven, tvele);
-        myDB.deleteAllData();
-    }*/
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

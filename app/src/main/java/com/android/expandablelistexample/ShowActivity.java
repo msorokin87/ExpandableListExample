@@ -4,6 +4,8 @@ import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -13,11 +15,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+import java.util.Objects;
 
 public class ShowActivity extends AppCompatActivity {
 
-
-        ArrayList<String> one;
+        RecyclerView recyclerView;
+        CustomAdapterShow adapterShow;
+        ArrayList<String> one, two1;
         String id="";
         TextView text_data;
         DatabaseHelper myDB;
@@ -29,43 +36,47 @@ public class ShowActivity extends AppCompatActivity {
         setContentView(R.layout.activity_show);
 
         init();
+        myDB = new DatabaseHelper(ShowActivity.this);
 
         one = new ArrayList<>();
+        two1 = new ArrayList<>();
         //getAndSetIntent();
-        /*if (getIntent().hasExtra("id")){
+        if (getIntent().hasExtra("id")){
+            id = getIntent().getStringExtra("id");
+        }
+        text_data.setText(id);
 
-
-        id_new = Integer.parseInt(id);
-        }*/id = getIntent().getStringExtra("id");
-
-        System.out.println(id);
-
-       /* Cursor cursor = myDB.readAllByID(id);
+        Cursor cursor = myDB.readAllData();
         if (cursor.getCount()==0){
-
-
         }
         else while (cursor.moveToNext()){
-            // id_row.add(cursor.getString(0));
-            one.add(cursor.getString(2));
-            // two.add(cursor.getString(3));
-            // three.add(cursor.getString(4));
-            // four.add(cursor.getString(5));
-            // fife.add(cursor.getString(6));
-            /// six.add(cursor.getString(7));
-            //  seven.add(cursor.getString(8));
-            // eith.add(cursor.getString(9));
-            //  nine.add(cursor.getString(10));
-            //  thene.add(cursor.getString(11));
-            //  eleven.add(cursor.getString(12));
-            //  tvele.add(cursor.getString(13));
-            System.out.println(one);
+            one.add(cursor.getString(1));
 
-        }*/
+        }
+        List<String> list = new ArrayList<>(one);
+        for (String lis : list){
+            if (!lis.equals("null")){
+                two1.add(lis);
+                //System.out.println("Twoq после перебора " + two1);
+            }
+        }
+
+        System.out.println("Выход из цикла " + two1);
+
+
+
+
+        adapterShow = new CustomAdapterShow(ShowActivity.this, this, two1);
+        recyclerView.setAdapter(adapterShow);
+        recyclerView.setLayoutManager(new LinearLayoutManager(ShowActivity.this));
     }
+
+
+
 
     void init(){
         text_data = findViewById(R.id.text_data);
+        recyclerView = findViewById(R.id.recyclerView);
 
     }
 
@@ -74,7 +85,19 @@ public class ShowActivity extends AppCompatActivity {
 
 
         }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        myDB.deleteAllData();
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        myDB.deleteAllData();
+    }
+}
 
 
 
