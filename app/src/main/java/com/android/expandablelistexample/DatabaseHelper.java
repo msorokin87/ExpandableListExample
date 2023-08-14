@@ -28,6 +28,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COLUMN_ID_SORT = "_id";
 
 
+
+
     public static final String COLUMN_NAME_SORT = "name";
     public static final String COLUMN_NAME_DESC_D = "name";
     public static final String COLUMN_ONE = "one";

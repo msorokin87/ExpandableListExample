@@ -90,6 +90,8 @@ public class ListActivity extends AppCompatActivity {
                 id_row, one, two, three, four, fife, six, seven, eith, nine, thene, eleven, tvele,
                 id_row_d, one_d, two_d, three_d, four_d, fife_d, six_d, seven_d, eith_d, nine_d, thene_d, eleven_d, tvele_d);
         recyclerView.setAdapter(customAdapter);
+
+
         int i = customAdapter.getItemCount();
         if (i == 2){
             addButton.setVisibility(View.GONE);
