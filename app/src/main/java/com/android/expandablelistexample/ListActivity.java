@@ -31,21 +31,10 @@ public class ListActivity extends AppCompatActivity {
     ImageView empty_imageview;
     TextView no_data;
     ArrayList<ModelNewList> modelArray, modelGoodsArray;
-    /*String one;
-    String two;
-    String three;
-    String four;
-    String fife;
-    String six;
-    String seven;
-    String eith;
-    String nine;
-    String thene;
-    String eleven;
-    String tvele;*/
 
     DatabaseHelper myDB;
-    ArrayList<String> newArraytoAdapter, id_row, one, two, three, four, fife, six, seven, eith, nine, thene, eleven, tvele;
+    ArrayList<String> id_row, one, two, three, four, fife, six, seven, eith, nine, thene, eleven, tvele;
+    ArrayList<String> id_row_d, one_d, two_d, three_d, four_d, fife_d, six_d, seven_d, eith_d, nine_d, thene_d, eleven_d, tvele_d;
     CustomAdapter customAdapter;
 
     @Override
@@ -78,11 +67,27 @@ public class ListActivity extends AppCompatActivity {
         eleven = new ArrayList<>();
         tvele = new ArrayList<>();
 
+        id_row_d = new ArrayList<>();
+        one_d = new ArrayList<>();
+        two_d = new ArrayList<>();
+        three_d = new ArrayList<>();
+        four_d = new ArrayList<>();
+        fife_d = new ArrayList<>();
+        six_d = new ArrayList<>();
+        seven_d = new ArrayList<>();
+        eith_d = new ArrayList<>();
+        nine_d = new ArrayList<>();
+        thene_d = new ArrayList<>();
+        eleven_d = new ArrayList<>();
+        tvele_d = new ArrayList<>();
+
 
         storeDataInArray();
 
 
-        customAdapter = new CustomAdapter(ListActivity.this, this, id_row, one, two, three, four, fife, six, seven, eith, nine, thene, eleven, tvele);
+        customAdapter = new CustomAdapter(ListActivity.this, this,
+                id_row, one, two, three, four, fife, six, seven, eith, nine, thene, eleven, tvele,
+                id_row_d, one_d, two_d, three_d, four_d, fife_d, six_d, seven_d, eith_d, nine_d, thene_d, eleven_d, tvele_d);
         recyclerView.setAdapter(customAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(ListActivity.this));
 
@@ -117,6 +122,28 @@ public class ListActivity extends AppCompatActivity {
         }
         empty_imageview.setVisibility(View.GONE);
         no_data.setVisibility(View.GONE);
+
+
+
+        Cursor cursor_desc = myDB.readAllDesc_New();
+        if (cursor.getCount()==0){
+        }
+        else while (cursor_desc.moveToNext()){
+            id_row_d.add(cursor_desc.getString(0));
+            one_d.add(cursor_desc.getString(2));
+            two_d.add(cursor_desc.getString(3));
+            three_d.add(cursor_desc.getString(4));
+            four_d.add(cursor_desc.getString(5));
+            fife_d.add(cursor_desc.getString(6));
+            six_d.add(cursor_desc.getString(7));
+            seven_d.add(cursor_desc.getString(8));
+            eith_d.add(cursor_desc.getString(9));
+            nine_d.add(cursor_desc.getString(10));
+            thene_d.add(cursor_desc.getString(11));
+            eleven_d.add(cursor_desc.getString(12));
+            tvele_d.add(cursor_desc.getString(13));
+
+        }
 
     }
 

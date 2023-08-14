@@ -159,18 +159,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                       String eleven_d,String tvelve_d) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
-        cv.put(COLUMN_ONE, one_d);
-        cv.put(COLUMN_TWO, two_d);
-        cv.put(COLUMN_THREE, three_d);
-        cv.put(COLUMN_FOUR, four_d);
-        cv.put(COLUMN_FIFE, fife_d);
-        cv.put(COLUMN_SIX, six_d);
-        cv.put(COLUMN_SEVEN, seven_d);
-        cv.put(COLUMN_EITH, eith_d);
-        cv.put(COLUMN_NINE, nine_d);
-        cv.put(COLUMN_THENE, thene_d);
-        cv.put(COLUMN_ELEVEN, eleven_d);
-        cv.put(COLUMN_TWELVE, tvelve_d);
+        cv.put(COLUMN_ONE_D, one_d);
+        cv.put(COLUMN_TWO_D, two_d);
+        cv.put(COLUMN_THREE_D, three_d);
+        cv.put(COLUMN_FOUR_D, four_d);
+        cv.put(COLUMN_FIFE_D, fife_d);
+        cv.put(COLUMN_SIX_D, six_d);
+        cv.put(COLUMN_SEVEN_D, seven_d);
+        cv.put(COLUMN_EITH_D, eith_d);
+        cv.put(COLUMN_NINE_D, nine_d);
+        cv.put(COLUMN_THENE_D, thene_d);
+        cv.put(COLUMN_ELEVEN_D, eleven_d);
+        cv.put(COLUMN_TWELVE_D, tvelve_d);
 
         long result = db.insert(TABLE_NAME_DESC_NEW, null, cv);
         if (result ==-1) {
@@ -230,6 +230,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         } return cursor;
     }
     Cursor readAllDesc() {
+        String query = "SELECT * FROM " + TABLE_NAME_DESC;
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = null;
+        if (db != null) {
+            cursor = db.rawQuery(query, null);
+        } return cursor;
+    }
+
+    Cursor readAllDesc_New() {
         String query = "SELECT * FROM " + TABLE_NAME_DESC_NEW;
         SQLiteDatabase db = this.getReadableDatabase();
 
@@ -297,6 +307,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     void deleteOneRaw (String title) {
         SQLiteDatabase db = this.getWritableDatabase();
         long result = db.delete(TABLE_NAME, "goods_title=?", new String[]{title});
+        if (result ==-1) {
+            Toast.makeText(context, "Не получилось удалить", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            Toast.makeText(context, "Удалено", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    void deleteOneRawDesc (String title) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        long result = db.delete(TABLE_NAME_DESC, "goods_desc_new=?", new String[]{title});
         if (result ==-1) {
             Toast.makeText(context, "Не получилось удалить", Toast.LENGTH_SHORT).show();
         }

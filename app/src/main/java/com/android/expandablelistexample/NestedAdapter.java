@@ -97,9 +97,11 @@ public class NestedAdapter extends RecyclerView.Adapter<NestedAdapter.NestedView
                     holder.text_desc.setHint(R.string.hint_add);
 
                     String untext = holder.mTv.getText().toString();
+                    String unedit = holder.text_desc.getText().toString();
                     myDB = new DatabaseHelper(save_buton.getContext());
                     System.out.println("Снято " + untext);
                     myDB.deleteOneRaw(untext);
+                    myDB.deleteOneRawDesc(unedit);
                 }
 
             }
@@ -114,6 +116,7 @@ public class NestedAdapter extends RecyclerView.Adapter<NestedAdapter.NestedView
         save_buton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                myDB = new DatabaseHelper(save_buton.getContext());
                 Cursor cursor = myDB.readAllData();
 
                 if (cursor.getCount()==0){
@@ -226,8 +229,6 @@ public class NestedAdapter extends RecyclerView.Adapter<NestedAdapter.NestedView
                 Intent intent = new Intent(v.getContext(), ListActivity.class);
                 context.startActivity(intent);
 
-
-                
 
             }
         });

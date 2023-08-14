@@ -20,12 +20,14 @@ public class CustomAdapterShow extends RecyclerView.Adapter<CustomAdapterShow
    private Context context;
    private Activity activity;
    DatabaseHelper myDb;
-   ArrayList<String> one;
+   ArrayList<String> one, desc_two;
 
-    public CustomAdapterShow(Context context, Activity activity, ArrayList<String> one) {
+    public CustomAdapterShow(Context context, Activity activity,
+                             ArrayList<String> one, ArrayList<String> desc_two) {
         this.context = context;
         this.activity = activity;
         this.one = one;
+        this.desc_two = desc_two;
 
     }
 
@@ -42,6 +44,8 @@ public class CustomAdapterShow extends RecyclerView.Adapter<CustomAdapterShow
     public void onBindViewHolder(@NonNull CustomAdapterShow.MyViewHolder holder, @SuppressLint("RecyclerView")final int position) {
 
         holder.text_title.setText(String.valueOf(one.get(position)));
+
+         holder.text_desc.setText(desc_two.get(position));
 
 
 
