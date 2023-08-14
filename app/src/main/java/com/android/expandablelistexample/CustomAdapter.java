@@ -102,6 +102,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter
 
     @Override
     public int getItemCount() {
+
         return id_row.size();
     }
 

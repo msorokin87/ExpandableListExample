@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -89,6 +90,16 @@ public class ListActivity extends AppCompatActivity {
                 id_row, one, two, three, four, fife, six, seven, eith, nine, thene, eleven, tvele,
                 id_row_d, one_d, two_d, three_d, four_d, fife_d, six_d, seven_d, eith_d, nine_d, thene_d, eleven_d, tvele_d);
         recyclerView.setAdapter(customAdapter);
+        int i = customAdapter.getItemCount();
+        if (i == 2){
+            addButton.setVisibility(View.GONE);
+            back_button.setVisibility(View.GONE);
+            Toast.makeText(this, "Можно добавить только 2 записи", Toast.LENGTH_SHORT).show();
+        } else {
+            addButton.setVisibility(View.VISIBLE);
+            back_button.setVisibility(View.VISIBLE);
+        }
+        System.out.println("Количество айтемов " + i);
         recyclerView.setLayoutManager(new LinearLayoutManager(ListActivity.this));
 
 
@@ -184,6 +195,7 @@ public class ListActivity extends AppCompatActivity {
                 myDB = new DatabaseHelper(ListActivity.this);
                 myDB.deleteAllDataSort();
                 myDB.deleteAllDataDesc();
+                myDB.deleteAllDataDescNew();
 
 
                 Intent intent = new Intent(ListActivity.this, ListActivity.class);
